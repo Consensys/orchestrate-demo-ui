@@ -6,6 +6,8 @@
 
 - Install dependencies: `npm install` or `yarn`
 
+- Generate .env file: `npm run env` or `yarn env`
+
 - Start the server: `npm run start` or `yarn start`
 
-- Views are on: `localhost:3000`
+- Views are on: `localhost:3001`

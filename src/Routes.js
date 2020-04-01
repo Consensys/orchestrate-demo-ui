@@ -8,11 +8,11 @@ import {
   Homepage as HomepageView,
   Accounts as AccountsView,
   Contracts as ContractsView,
+  Consumer as ConsumerView,
   Networks as NetworksView,
-  Explorer as ExplorerView,
   Faucets as FaucetsView,
+  Transactions as TransactionsView,
   Help as HelpView,
-  Logs as LogsView,
   SignIn as SignInView,
   NotFound as NotFoundView
 } from './views';
@@ -44,16 +44,16 @@ const Routes = () => {
         path="/contracts"
       />
       <RouteWithLayout
+        component={ConsumerView}
+        exact
+        layout={MainLayout}
+        path="/consumer"
+      />
+      <RouteWithLayout
         component={NetworksView}
         exact
         layout={MainLayout}
         path="/networks"
-      />
-      <RouteWithLayout
-        component={ExplorerView}
-        exact
-        layout={MainLayout}
-        path="/explorer"
       />
       <RouteWithLayout
         component={FaucetsView}
@@ -62,16 +62,16 @@ const Routes = () => {
         path="/faucets"
       />
       <RouteWithLayout
+        component={TransactionsView}
+        exact
+        layout={MainLayout}
+        path="/transactions"
+      />
+      <RouteWithLayout
         component={HelpView}
         exact
         layout={MainLayout}
         path="/help"
-      />
-      <RouteWithLayout
-        component={LogsView}
-        exact
-        layout={MainLayout}
-        path="/logs"
       />
       <RouteWithLayout
         component={SignInView}

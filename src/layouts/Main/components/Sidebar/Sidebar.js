@@ -10,6 +10,8 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import HelpIcon from '@material-ui/icons/Help';
 import DeviceHubIcon from '@material-ui/icons/DeviceHub';
+import SendIcon from '@material-ui/icons/Send';
+import SyncIcon from '@material-ui/icons/Sync';
 
 import { SidebarNav } from './components';
 import { NetworkSelector } from './components';
@@ -59,21 +61,21 @@ const Sidebar = props => {
       href: '/contracts',
       icon: <LibraryBooksIcon />
     },
-    // {
-    //   title: 'Explorer',
-    //   href: '/explorer',
-    //   icon: <BallotIcon />
-    // },
+    {
+      title: 'Transactions',
+      href: '/transactions',
+      icon: <SendIcon />
+    },
+    {
+      title: 'Consumer',
+      href: '/consumer',
+      icon: <SyncIcon />
+    },
     {
       title: 'Faucets',
       href: '/faucets',
       icon: <LocalGasStationIcon />
-    },
-    // {
-    //   title: 'Logs',
-    //   href: '/logs',
-    //   icon: <HistoryIcon />
-    // }
+    }
   ];
 
   const networkpages = [
