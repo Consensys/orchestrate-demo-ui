@@ -19,7 +19,6 @@ const Transactions = () => {
   const classes = useStyles();
 
   const [displayForm, setDisplayForm] = useState(false);
-  const [updated, setUpdated] = useState(new Date());
 
   const openForm = id => {
     window.scrollTo({
@@ -41,7 +40,6 @@ const Transactions = () => {
         <div className={classes.content}>
           <TransactionsForm
             closeForm={closeForm}
-            setUpdated={setUpdated}
           />
         </div>
       )}

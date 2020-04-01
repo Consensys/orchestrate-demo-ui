@@ -10,14 +10,16 @@ const reducer = (state, action) => {
     type,
     networks,
     uuid,
-    name
+    name,
+    urls
   } = action;
   let networksAfter = [...state.networks];
   switch (type) {
     case 'ADD': {
       networksAfter.push({
         id: uuid,
-        name
+        name,
+        urls
       });
       return { ...state, networks: [...networksAfter] };
     }
@@ -27,7 +29,8 @@ const reducer = (state, action) => {
         const network = networks[index];
         const newNetworks = {
           id: network.uuid,
-          name: network.name
+          name: network.name,
+          urls: network.urls,
         };
         networksAfter.push(newNetworks);
       }

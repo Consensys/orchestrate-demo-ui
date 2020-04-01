@@ -71,12 +71,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TransactionsForm = props => {
-  const { className, closeForm, setUpdated, transactions, transactionId, ...rest } = props;
+  const { className, closeForm, transactions, transactionId, ...rest } = props;
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
-  const [fromLoading, setFromLoading] = useState(true);
-  const [toLoading, setToLoading] = useState(true);
+  const [accountsLoading, setAccountsLoading] = useState(true);
   const [accounts, setAccounts] = useState([]);
 
   const {
@@ -129,7 +128,15 @@ const TransactionsForm = props => {
   );
 
   useEffect(() => {
+
+
+
+
     if (response && response.status === 201) {
+
+      console.log("=========>");
+      console.log(response.data)
+
       setLoading(false);
       if (!response.data.commands) {
         // Error
@@ -153,7 +160,6 @@ const TransactionsForm = props => {
         type: 'SUCCESS',
         message: `Account created`
       });
-      setUpdated(new Date());
     } else if (error) {
       setLoading(false);
       // Error
@@ -162,7 +168,7 @@ const TransactionsForm = props => {
         message: `${error.message}: ${error.config.baseURL}${error.config.url}`
       });
     }
-  }, [response, error, dispatchCommand, dispatchAlert, setUpdated]);
+  }, [response, error, dispatchCommand, dispatchAlert]);
 
 
   const { response: accountsResponse, sendRequest: sendAccountsRequest } = useAxios(
@@ -172,10 +178,10 @@ const TransactionsForm = props => {
   useEffect(sendAccountsRequest, []);
 
   useEffect(() => {
-    setFromLoading(true);
+    setAccountsLoading(true);
     console.log(accountsResponse);
     if (accountsResponse && accountsResponse.status === 200) {
-      setFromLoading(false);
+      setAccountsLoading(false);
       if (!accountsResponse.data.commands) {
         // Error
         dispatchAlert({
@@ -239,7 +245,7 @@ const TransactionsForm = props => {
                 {networks.map(network => (
                   <MenuItem
                     key={network.id}
-                    value={network.id}
+                    value={network.urls[0]}
                   >
                     {network.name}
                   </MenuItem>
@@ -264,7 +270,7 @@ const TransactionsForm = props => {
               xs={12}
               className={classes.selectAccount}
             >
-              {fromLoading ? <LinearProgress /> :
+              {accountsLoading ? <LinearProgress /> :
                 <Select
                   className={classes.select}
                   input={
@@ -305,7 +311,7 @@ const TransactionsForm = props => {
               xs={12}
               className={classes.selectAccount}
             >
-              {toLoading ? <LinearProgress /> :
+              {accountsLoading ? <LinearProgress /> :
                 <Select
                   className={classes.select}
                   input={
