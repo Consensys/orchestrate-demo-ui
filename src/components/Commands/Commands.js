@@ -67,6 +67,21 @@ const Commands = props => {
     return formatedCommand;
   }
 
+  function formatResponse(responses) {
+    let formatedCommand;
+
+    if (typeof responses === 'string' || Array.isArray(responses)) {
+      formatedCommand = responses.split("\n").map((command, index) => {
+        return <span key={index}>
+          {command}<br />
+        </span>;
+      });
+    } else {
+      formatedCommand = JSON.stringify(responses);
+    }
+    return formatedCommand;
+  }
+
   return (
     <Card
       className={clsx(classes.root, className)}
@@ -84,9 +99,9 @@ const Commands = props => {
                 className={classes.textCommand}
                 key={command.id}
               >
-                > {command.command}<br />
+                > {formatCommand(command.command)}<br />
                 <span className={classes.textResponse}>
-                  &nbsp;&nbsp;{formatCommand(command.response)}
+                  &nbsp;&nbsp;{formatResponse(command.response)}
                 </span><br />
               </span>
             ))}

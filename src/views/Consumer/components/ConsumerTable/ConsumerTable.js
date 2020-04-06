@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 import {
   Card,
   CardContent,
+  LinearProgress,
   Table,
   TableBody,
   TableCell,
@@ -13,6 +14,7 @@ import {
   TableRow
 } from '@material-ui/core';
 
+import AlertContext from 'context/alert-context';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -46,16 +48,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LogsTable = props => {
+const ConsumerTable = props => {
   const {
     className,
-    openForm,
-    closeForm,
+    updated,
     ...rest
   } = props;
 
   const classes = useStyles();
 
+  const [loading, setLoading] = useState(false);
+  const [consumerReceipts, setConsumerReceipts] = useState([]);
 
   return (
     <Fragment>
@@ -75,13 +78,20 @@ const LogsTable = props => {
                 </colgroup>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Name</TableCell>
+                    <TableCell>Receipt</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-
+                  {consumerReceipts.map((receipt, index) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        ---
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
+              {loading && <LinearProgress />}
             </div>
           </PerfectScrollbar>
         </CardContent>
@@ -90,8 +100,8 @@ const LogsTable = props => {
   );
 };
 
-LogsTable.propTypes = {
+ConsumerTable.propTypes = {
   className: PropTypes.string
 };
 
-export default LogsTable;
+export default ConsumerTable;

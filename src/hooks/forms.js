@@ -132,3 +132,47 @@ export const useFaucetFormInput = (
     validity
   };
 };
+
+export const useTransactionFormInput = (
+  defaultChainId
+) => {
+  const defaultFrom = '';
+  const defaultTo = '';
+  const defaultIncrement = 1;
+
+  const [chainId, setChainId] = useState(defaultChainId);
+  const [from, setFrom] = useState(defaultFrom);
+  const [to, setTo] = useState(defaultTo);
+  const [increment, setIncrement] = useState(defaultIncrement);
+
+  const inputChangeChainIdHandler = event => {
+    let newValue = event.target.value;
+    setChainId(newValue);
+  };
+
+  const inputChangeFromHandler = event => {
+    let newValue = event.target.value;
+    setFrom(newValue);
+  };
+
+  const inputChangeToHandler = event => {
+    let newValue = event.target.value;
+    setTo(newValue);
+  };
+
+  const inputChangeIncrementHandler = event => {
+    let newValue = event.target.value;
+    setIncrement(newValue);
+  };
+
+  return {
+    chainId,
+    from,
+    to,
+    increment,
+    onChangeChainId: inputChangeChainIdHandler,
+    onChangeFrom: inputChangeFromHandler,
+    onChangeTo: inputChangeToHandler,
+    onChangeIncrement: inputChangeIncrementHandler
+  };
+};
